@@ -7,6 +7,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const apiKey = "AIzaSyDR_nU82c3AiRczmE6H5MjuKWQaHAfZZp4";
   const sheetId = "168iifOQrElMOl4b-iMAemMHzdRx0DbLNLdUW7aTVRE0";
   let attendees = {};
+  const arabicMapping = {
+    a: "ش",
+    b: "لا",
+    c: "ؤ",
+    d: "ي",
+    e: "ث",
+    f: "ب",
+    g: "ل",
+    h: "ا",
+    i: "ه",
+    j: "ت",
+    k: "ن",
+    l: "م",
+    m: "ة",
+    n: "ى",
+    o: "خ",
+    p: "ح",
+    q: "ض",
+    r: "ق",
+    s: "س",
+    t: "ف",
+    u: "ع",
+    v: "ر",
+    w: "ص",
+    x: "ء",
+    y: "غ",
+    z: "ئ",
+    ";": "ك",
+    ",": "و",
+    ".": "ز",
+    "[": "ج",
+    "]": "د",
+    "/": "ط",
+  };
+  function convertToArabic(gibberish) {
+    return gibberish
+      .split("")
+      .map((char) => arabicMapping[char] || char)
+      .join("");
+  }
 
   // Fetch Google Sheets data
   fetch(
@@ -42,12 +82,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (temp.includes(",")) {
           temp = temp.replace(",", " ");
         }
-        nameInput.value = temp;
+        nameInput.value = convertToArabic(temp); // Convert gibberish to Arabic
       } else {
         nameInput.value = "Guest";
       }
     }
   });
+
+  function convertToArabic(gibberish) {
+    return gibberish
+      .split("")
+      .map((char) => arabicMapping[char] || char)
+      .join("");
+  }
 
   printButton.addEventListener("click", () => {
     if (nameInput.value && nameInput.value !== "Guest") {
