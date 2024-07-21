@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Attendance</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+      .container {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .wrng {
+        background-color: #fff;
+        color: red;
+      }
+      input {
+        margin: 10px;
+        padding: 10px;
+        font-size: 16px;
+        width: 80%;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>QR Code Attendance</h1>
+      <input
+        type="text"
+        id="qrInput"
+        placeholder="Scan QR Code here"
+        autofocus
+      />
+      <input type="text" id="nameInput" placeholder="Attendee Name" />
+      <button id="printButton">Print Label</button>
+      <button id="printCButton">Print Custom</button>
+      <p id="errMsg" style="text-align: center">Registration System</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+      // Function to focus on the qrInput field
+      function focusQrInput() {
+        document.getElementById("qrInput").focus();
+      }
+
+      // Function to handle "Enter" key press on qrInput
+      document
+        .getElementById("qrInput")
+        .addEventListener("keypress", function (event) {
+          if (event.keyCode === 13) {
+            // 13 is the key code for "Enter"
+            // document.getElementById("printButton").click(); // Trigger the click event of printButton
+          }
+        });
+
+      // Focus the qrInput when the page/tab becomes visible
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "visible") {
+          focusQrInput();
+        }
+      });
+
+      // Focus the qrInput when the page initially loads
+      window.addEventListener("load", focusQrInput);
+    </script>
+  </body>
+</html>
